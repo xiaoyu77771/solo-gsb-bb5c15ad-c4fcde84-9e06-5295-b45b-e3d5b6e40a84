@@ -1,0 +1,14 @@
+{
+  "name": "stage-order-optimizer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "舞台换景顺序优化 Web 应用：在满足依赖、固定序位、禁止相邻约束下，求道具增减次数最少的演出顺序",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/solver.test.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
