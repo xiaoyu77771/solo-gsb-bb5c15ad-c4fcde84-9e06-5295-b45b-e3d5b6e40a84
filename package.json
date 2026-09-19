@@ -1,0 +1,17 @@
+{
+  "name": "stage-scene-optimizer",
+  "version": "1.0.0",
+  "description": "舞台换景顺序优化 Web 应用：在前后依赖、固定序位、禁止相邻约束下最小化道具增减次数",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/solver.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

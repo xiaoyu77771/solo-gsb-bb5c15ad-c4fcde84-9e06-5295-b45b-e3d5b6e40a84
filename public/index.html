@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>舞台换景顺序优化器</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <h1>🎭 舞台换景顺序优化器</h1>
+      <p class="subtitle">录入至多 12 个场景与道具，设置前后依赖、固定序位、禁止相邻，自动求道具增减次数最少的演出顺序</p>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+    <!-- ============ 编辑区 ============ -->
+    <section class="panel editor">
+      <div class="panel-head">
+        <h2>方案编辑</h2>
+        <div class="head-actions">
+          <button id="btn-sample" class="btn ghost" type="button">载入示例</button>
+          <button id="btn-clear" class="btn ghost" type="button">清空</button>
+        </div>
+      </div>
+
+      <h3 class="block-title">场景与道具 <span id="scene-count" class="badge">0/12</span></h3>
+      <div id="scene-list" class="scene-list"></div>
+      <button id="btn-add-scene" class="btn dashed" type="button">＋ 添加场景</button>
+
+      <h3 class="block-title">前后依赖（A 必须在 B 之前）</h3>
+      <div class="constraint-add">
+        <select id="dep-a"></select>
+        <span class="arrow">在</span>
+        <select id="dep-b"></select>
+        <span class="arrow">之前</span>
+        <button id="btn-add-dep" class="btn small" type="button">添加</button>
+      </div>
+      <ul id="dep-list" class="chips"></ul>
+
+      <h3 class="block-title">固定序位</h3>
+      <div class="constraint-add">
+        <select id="fix-s"></select>
+        <span class="arrow">固定在第</span>
+        <input id="fix-pos" type="number" min="1" value="1" />
+        <span class="arrow">位</span>
+        <button id="btn-add-fix" class="btn small" type="button">添加</button>
+      </div>
+      <ul id="fix-list" class="chips"></ul>
+
+      <h3 class="block-title">禁止相邻</h3>
+      <div class="constraint-add">
+        <select id="fb-a"></select>
+        <span class="arrow">不与</span>
+        <select id="fb-b"></select>
+        <span class="arrow">相邻</span>
+        <button id="btn-add-fb" class="btn small" type="button">添加</button>
+      </div>
+      <ul id="fb-list" class="chips"></ul>
+
+      <div class="compute-row">
+        <button id="btn-solve" class="btn primary big" type="button">▶ 计算最优顺序</button>
+      </div>
+
+      <div class="save-row">
+        <input id="plan-name" type="text" placeholder="方案名称（用于保存）" maxlength="60" />
+        <button id="btn-save" class="btn" type="button">保存方案</button>
+      </div>
+    </section>
+
+    <!-- ============ 结果区 ============ -->
+    <section class="panel result">
+      <div class="panel-head">
+        <h2>优化结果</h2>
+      </div>
+      <div id="result-body" class="result-body">
+        <p class="placeholder">设置好场景与约束后，点击「计算最优顺序」。</p>
+      </div>
+    </section>
+  </main>
+
+  <section class="wrap panel saved">
+    <div class="panel-head">
+      <h2>已保存方案</h2>
+      <button id="btn-refresh-plans" class="btn ghost small" type="button">刷新</button>
+    </div>
+    <div id="plan-list" class="plan-list"></div>
+  </section>
+
+  <footer class="wrap footer">
+    <span>目标：相邻场景间道具上场（增加）与撤场（移除）总次数最少 · 装台/卸台单独统计</span>
+  </footer>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+services:
+  stage-optimizer:
+    build: .
+    image: stage-scene-optimizer:latest
+    container_name: stage-scene-optimizer
+    ports:
+      - "3000:3000"
+    volumes:
+      - stage-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  stage-data:
